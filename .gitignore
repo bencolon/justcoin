@@ -1,0 +1,7 @@
+*.o
+*.a
+*.so
+*.exe
+*.test
+.justcoin
+justcoin_wallet_cli
