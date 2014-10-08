@@ -22,38 +22,62 @@ type Market struct {
 }
 
 func List() {
-	data, err := ioutil.ReadFile(os.Getenv("HOME") + "/.justcoin")
-	if err != nil || len(data) == 0 {
-		log.Println("Please setup your Justcoin api key first")
-		log.Println("Run `justcoin setup`")
-		os.Exit(0)
+	key, err := ioutil.ReadFile(os.Getenv("HOME") + "/.justcoin")
+
+	if err != nil || len(key) == 0 {
+		needSetup()
 	} else {
-		resp, err := http.Get("https://justcoin.com/api/v1/markets?key=" + string(data))
+		resp := getJsonData(string(key))
 		defer resp.Body.Close()
-		if err != nil {
-			log.Fatal(err)
-			os.Exit(0)
-		}
-		if resp.StatusCode != 200 {
-			log.Fatal("HTTP Error " + resp.Status)
-			os.Exit(0)
-		}
 
-		body, err := ioutil.ReadAll(resp.Body)
-		if err != nil {
-			log.Fatal(err)
-			os.Exit(0)
-		}
+		body := readBody(resp)
+		var markets []Market = extractJson(body)
 
-		var markets []Market
-		err = json.Unmarshal(body, &markets)
-		if err != nil {
-			log.Fatal(err)
-			os.Exit(0)
-		}
-		for _, v := range markets {
-			price, _ := strconv.ParseFloat(v.Last, 16)
-			fmt.Printf("%s %.2f\n", v.Id, price)
-		}
+		displayMarkets(markets)
+	}
+}
+
+func needSetup() {
+	log.Println("Please setup your Justcoin api key first")
+	log.Println("Run `justcoin setup`")
+	os.Exit(0)
+}
+
+func getJsonData(key string) (resp *http.Response) {
+	resp, err := http.Get("https://justcoin.com/api/v1/markets?key=" + key)
+
+	if err != nil {
+		log.Fatal(err)
+		os.Exit(0)
+	} else if resp.StatusCode != 200 {
+		log.Fatal("HTTP Error " + resp.Status)
+		os.Exit(0)
+	}
+
+	return
+}
+
+func readBody(resp *http.Response) (body []byte) {
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		log.Fatal(err)
+		os.Exit(0)
+	}
+	return
+}
+
+func extractJson(body []byte) (markets []Market) {
+	err := json.Unmarshal(body, &markets)
+	if err != nil {
+		log.Fatal(err)
+		os.Exit(0)
+	}
+	return
+}
+
+func displayMarkets(markets []Market) {
+	for _, v := range markets {
+		price, _ := strconv.ParseFloat(v.Last, 16)
+		fmt.Printf("%s %.2f\n", v.Id, price)
 	}
 }
