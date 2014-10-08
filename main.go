@@ -3,8 +3,8 @@ package main
 import (
 	"os"
 
-	"github.com/bencolon/justcoin_wallet_cli/helpers"
-	"github.com/bencolon/justcoin_wallet_cli/tasks"
+	"github.com/bencolon/justcoin/helpers"
+	"github.com/bencolon/justcoin/tasks"
 
 	"github.com/codegangsta/cli"
 )
