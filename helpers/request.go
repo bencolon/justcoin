@@ -1,27 +1,16 @@
-package tasks
+package helpers
 
 import (
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
-	"strconv"
+
+	"github.com/bencolon/justcoin/market"
 )
 
-type Market struct {
-	Id     string
-	Last   string
-	High   string
-	Low    string
-	Bid    string
-	Ask    string
-	Volume string
-	Scale  int
-}
-
-func List() {
+func ReadMarkets() (markets []market.DataStruct) {
 	key, err := ioutil.ReadFile(os.Getenv("HOME") + "/.justcoin")
 
 	if err != nil || len(key) == 0 {
@@ -31,10 +20,10 @@ func List() {
 		defer resp.Body.Close()
 
 		body := readBody(resp)
-		var markets []Market = extractJson(body)
-
-		displayMarkets(markets)
+		markets = extractJson(body)
 	}
+
+	return
 }
 
 func needSetup() {
@@ -66,18 +55,11 @@ func readBody(resp *http.Response) (body []byte) {
 	return
 }
 
-func extractJson(body []byte) (markets []Market) {
+func extractJson(body []byte) (markets []market.DataStruct) {
 	err := json.Unmarshal(body, &markets)
 	if err != nil {
 		log.Fatal(err)
 		os.Exit(0)
 	}
 	return
-}
-
-func displayMarkets(markets []Market) {
-	for _, v := range markets {
-		price, _ := strconv.ParseFloat(v.Last, 16)
-		fmt.Printf("%s %.2f\n", v.Id, price)
-	}
 }

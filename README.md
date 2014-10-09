@@ -14,9 +14,50 @@ Enjoy `justcoin` executable
 
 ```bash
 Commands:
-  justcoin setup, s   # Setup your justcoin.com api key
-  justcoin list, l    # List all the justcoin.com markets
-  justcoin help, h    # Shows a list of commands or help for one command
+  justcoin setup, s                   # Setup your justcoin.com api key
+
+  justcoin markets, l                 # List all the justcoin.com markets
+    options
+      --BTCEUR '1'                    # BTC vs EUR trade
+      --BTCLTC '1'                    # BTC vs LTC trade
+      --BTCNOK '1'                    # BTC vs NOK trade
+      --BTCSTR '1'                    # BTC vs STR trade
+      --BTCUSD '1'                    # BTC vs USD trade
+      --BTCXRP '1'                    # BTC vs XRP trade
+
+  justcoin wallet, w                  # Display your wallet amounts depending the options
+    options:
+      --BTC 'amount'                  # BTC amount [at least one crypto amount is mandatory]
+      --LTC 'amount'                  # LTC amount
+      --STR 'amount'                  # STR amount
+      --XRP 'amount'                  # XRP amount
+      --curr 'currency'               # wallet curency : EUR (default) or USD or NOK) [mandatory]
+
+  justcoin help, h                    # Shows a list of commands or help for one command
+```
+
+## Examples
+
+```bash
+Commands:
+  justcoin markets
+    BTCEUR = 274.23
+    BTCLTC = 85.87
+    BTCNOK = 2241.00
+    BTCSTR = 142980.00
+    BTCUSD = 344.63
+    BTCXRP = 72000.72
+
+  justcoin markets --BTCEUR 1 --BTCUSD 1
+    BTCEUR = 274.23
+    BTCUSD = 344.63
+
+  justcoin wallet --BTC 12 --currency EUR
+    12.00 BTC = 3290.76 EUR
+
+  justcoin wallet --BTC 10 --LTC 50 --currency USD
+    10.00 BTC = 2742.30 EUR
+    50.00 LTC = 159.67 EUR
 ```
 
 ## Contributing

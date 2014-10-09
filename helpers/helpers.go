@@ -16,3 +16,12 @@ func (commands CliCommands) Find(name string) (cli.Command, error) {
 	}
 	return cli.Command{}, errors.New("Command not found")
 }
+
+func ArgumentsCount(context *cli.Context) (count int) {
+	for _, v := range context.FlagNames() {
+		if context.IsSet(v) {
+			count++
+		}
+	}
+	return
+}
