@@ -9,7 +9,7 @@ import (
 	"github.com/codegangsta/cli"
 )
 
-const Version = "0.1.1"
+const Version = "0.1.2"
 
 func main() {
 	app := cli.NewApp()
@@ -64,6 +64,16 @@ func main() {
 					Value: "1",
 					Usage: "BTC vs XRP trade",
 				},
+				cli.StringFlag{
+					Name:  "trend",
+					Value: "yes",
+					Usage: "BTC vs XRP trade",
+				},
+				cli.StringFlag{
+					Name:  "tot",
+					Value: "yes",
+					Usage: "Add trend colors to the market values",
+				},
 			},
 		},
 		{
@@ -102,7 +112,7 @@ func main() {
 				cli.StringFlag{
 					Name:  "tot",
 					Value: "yes",
-					Usage: "Display one more line with the wallet total",
+					Usage: "Add trend colors to the market values",
 				},
 			},
 		},

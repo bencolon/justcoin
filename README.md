@@ -24,15 +24,16 @@ Commands:
       --BTCSTR '1'                    # BTC vs STR trade
       --BTCUSD '1'                    # BTC vs USD trade
       --BTCXRP '1'                    # BTC vs XRP trade
+      --trend  'yes'                  # Add trend colors to the market values
 
   justcoin wallet, w                  # Display your wallet amounts depending the options
     options:
-      --BTC  'amount'                 # BTC amount [at least one crypto amount is mandatory]
-      --LTC  'amount'                 # LTC amount
-      --STR  'amount'                 # STR amount
-      --XRP  'amount'                 # XRP amount
-      --curr 'currency'               # Wallet curency : EUR (default) or USD or NOK) [mandatory]
-      --tot  'yes'                    # Display one more line with the wallet total
+      --BTC   'amount'                # BTC amount [at least one crypto amount is mandatory]
+      --LTC   'amount'                # LTC amount
+      --STR   'amount'                # STR amount
+      --XRP   'amount'                # XRP amount
+      --curr  'currency'              # Wallet curency : EUR (default) or USD or NOK) [mandatory]
+      --tot   'yes'                   # Display one more line with the wallet total
 
   justcoin help, h                    # Shows a list of commands or help for one command
 ```
