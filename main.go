@@ -102,7 +102,7 @@ func main() {
 				cli.StringFlag{
 					Name:  "tot",
 					Value: "yes",
-					Usage: "Display a one more line with the wallet total",
+					Usage: "Display one more line with the wallet total",
 				},
 			},
 		},

@@ -27,11 +27,12 @@ Commands:
 
   justcoin wallet, w                  # Display your wallet amounts depending the options
     options:
-      --BTC 'amount'                  # BTC amount [at least one crypto amount is mandatory]
-      --LTC 'amount'                  # LTC amount
-      --STR 'amount'                  # STR amount
-      --XRP 'amount'                  # XRP amount
-      --curr 'currency'               # wallet curency : EUR (default) or USD or NOK) [mandatory]
+      --BTC  'amount'                 # BTC amount [at least one crypto amount is mandatory]
+      --LTC  'amount'                 # LTC amount
+      --STR  'amount'                 # STR amount
+      --XRP  'amount'                 # XRP amount
+      --curr 'currency'               # Wallet curency : EUR (default) or USD or NOK) [mandatory]
+      --tot  'yes'                    # Display one more line with the wallet total
 
   justcoin help, h                    # Shows a list of commands or help for one command
 ```
@@ -55,9 +56,10 @@ Commands:
   justcoin wallet --BTC 12 --currency EUR
     12.00 BTC = 3290.76 EUR
 
-  justcoin wallet --BTC 10 --LTC 50 --currency USD
+  justcoin wallet --BTC 10 --LTC 50 --currency USD --tot yes
     10.00 BTC = 2742.30 EUR
     50.00 LTC = 159.67 EUR
+    TOTAL = 2901.97 EUR
 ```
 
 ## Contributing
