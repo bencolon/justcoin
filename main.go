@@ -9,10 +9,12 @@ import (
 	"github.com/codegangsta/cli"
 )
 
+const Version = "0.1.1"
+
 func main() {
 	app := cli.NewApp()
 	app.Name = "Justcoin"
-	app.Version = "0.1.0"
+	app.Version = Version
 	app.Usage = "List Justcoin.com markets values"
 
 	app.Commands = []cli.Command{
@@ -96,6 +98,11 @@ func main() {
 					Name:  "curr",
 					Value: "currency",
 					Usage: "Wallet curency : EUR (default) or USD or NOK) [mandatory]",
+				},
+				cli.StringFlag{
+					Name:  "tot",
+					Value: "yes",
+					Usage: "Display a one more line with the wallet total",
 				},
 			},
 		},

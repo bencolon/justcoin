@@ -45,6 +45,7 @@ func loadCurrencies(markets []market.DataStruct) (currencies map[string]float64)
 }
 
 func displayWallet(currencies map[string]float64, context *cli.Context) {
+	total := 0.
 	for _, c := range Cryptos {
 		if context.IsSet(c) {
 			amount, _ := strconv.ParseFloat(context.String(c), 32)
@@ -54,7 +55,16 @@ func displayWallet(currencies map[string]float64, context *cli.Context) {
 				backToBtc = currencies["BTC"+c]
 			}
 
-			fmt.Printf("%.2f %s = %.2f %s\n", amount, c, amount/backToBtc*currencies["BTC"+context.String("curr")], context.String("curr"))
+			value := amount / backToBtc * currencies["BTC"+context.String("curr")]
+			fmt.Printf("%.2f %s = %.2f %s\n", amount, c, value, context.String("curr"))
+
+			if context.IsSet("tot") {
+				total += value
+			}
 		}
+	}
+
+	if context.IsSet("tot") {
+		fmt.Printf("TOTAL = %.2f %s\n", total, context.String("curr"))
 	}
 }
